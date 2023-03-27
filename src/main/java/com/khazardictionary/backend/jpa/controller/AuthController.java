@@ -18,7 +18,7 @@ public class AuthController {
     @Autowired
     AuthService authService;
     
-    @PostMapping("/auth")
+    @PostMapping("/auth/token")
     public AuthResponse handleAuthentication(@RequestBody Credentials credentials) {
         return authService.authenticate(credentials);
     }

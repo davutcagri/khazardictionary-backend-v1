@@ -35,12 +35,13 @@ public class SecurityConfiguration {
         http.headers().frameOptions().disable();
 
         http.authorizeHttpRequests()
-                .requestMatchers(HttpMethod.PUT, "/api/1.0/users/{username}").authenticated()
-                .requestMatchers(HttpMethod.POST, "/api/1.0/posts").authenticated()
-                .requestMatchers(HttpMethod.POST, "/api/1.0/post-attachments").authenticated()
-                .requestMatchers(HttpMethod.POST, "/api/1.0/logout").authenticated()
-                .and()
-                .authorizeHttpRequests().anyRequest().permitAll();
+                .anyRequest().permitAll();
+//                .requestMatchers(HttpMethod.PUT, "/api/1.0/users/{username}").authenticated()
+//                .requestMatchers(HttpMethod.POST, "/api/1.0/posts").authenticated()
+//                .requestMatchers(HttpMethod.POST, "/api/1.0/post-attachments").authenticated()
+//                .requestMatchers(HttpMethod.POST, "/api/1.0/logout").authenticated()
+//                .and()
+//                .authorizeHttpRequests().anyRequest().permitAll();
         
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(tokenFilter(), UsernamePasswordAuthenticationFilter.class);
