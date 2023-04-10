@@ -13,6 +13,8 @@ public class PostVM {
 
     private long id;
 
+    private String title;
+
     private String content;
 
     private long timestamp;
@@ -27,13 +29,17 @@ public class PostVM {
 
     private boolean iLiked = false;
 
+    private long commentCount = 0;
+
     public PostVM(Post post, User user) {
         this.setId(post.getId());
+        this.setTitle(post.getTitle());
         this.setContent(post.getContent());
         this.setTimestamp(post.getTimestamp().getTime());
         this.setCategory(post.getCategory());
         this.setUser(new UserVM(post.getUser()));
         this.setLikeCount(post.getLikes().size());
+        this.setCommentCount(post.getComments().size());
         if (post.getFileAttachment() != null) {
             this.fileAttachment = new FileAttachmentVM(post.getFileAttachment());
         }

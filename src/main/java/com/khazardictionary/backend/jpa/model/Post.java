@@ -29,6 +29,9 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(length = 250)
+    private String title;
+
     @Column(length = 1000)
     private String content;
 
@@ -45,4 +48,7 @@ public class Post {
     
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Like> likes;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    private List<Comment> comments;
 }

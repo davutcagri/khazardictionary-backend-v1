@@ -40,6 +40,7 @@ public class PostService {
 
     public void save(PostSumbitVM postSumbitVM, User user) {
         Post post = new Post();
+        post.setTitle(postSumbitVM.getTitle());
         post.setContent(postSumbitVM.getContent());
         post.setTimestamp(new Date());
         post.setCategory(postSumbitVM.getCategory());
@@ -55,6 +56,10 @@ public class PostService {
 
     public Post getPost(long id) {
         return postRepository.getOne(id);
+    }
+
+    public Page<Post> getPostByUserAndId(User user, Long id, Pageable page) {
+        return postRepository.findByUserAndId(user, id, page);
     }
 
     public Page<Post> getPosts(Pageable page) {
@@ -106,12 +111,6 @@ public class PostService {
         postRepository.deleteById(id);
     }
 
-    public void deletePostsOfUsers(String username) {
-        User inDB = userService.getByUsername(username);
-        Specification<Post> userOwned = userIs(inDB);
-        List<Post> postsToBeRemoved = postRepository.findAll(userOwned);
-        postRepository.deleteAll(postsToBeRemoved);
-    }
 ////////////////////////////////////////////////////////////////////////////////
 
     //Old Posts

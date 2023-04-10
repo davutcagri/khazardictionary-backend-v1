@@ -1,6 +1,8 @@
 package com.khazardictionary.backend.jpa.controller;
 
+import com.khazardictionary.backend.jpa.model.Post;
 import com.khazardictionary.backend.jpa.service.PostService;
+import com.khazardictionary.backend.jpa.service.UserService;
 import com.khazardictionary.backend.jpa.vm.PostSumbitVM;
 import com.khazardictionary.backend.jpa.vm.PostVM;
 import com.khazardictionary.backend.shared.CurrentUser;
@@ -37,6 +39,9 @@ public class PostController {
 
     @Autowired
     PostService postService;
+
+    @Autowired
+    UserService userService;
 
     @PostMapping("/posts")
     public GenericResponse createPost(@Valid @RequestBody PostSumbitVM postSumbitVM, @CurrentUser User user) {
@@ -94,6 +99,18 @@ public class PostController {
     public Page<PostVM> getPostsByUsername(@PathVariable String username, 
             @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable page, @CurrentUser User user) {
         return postService.getPostsByUsername(username, page).map(post -> {
+            return new PostVM(post, user);
+        });
+    }
+
+    @GetMapping("/posts/{username}/{id:[0-9]+}")
+    public Page<PostVM> getPostByUsernameAndId(
+            @PathVariable String username,
+            @PathVariable Long id,
+            @CurrentUser User user,
+            @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable page) {
+        User postOwner = userService.getByUsername(username);
+        return postService.getPostByUserAndId(postOwner, id, page).map(post -> {
             return new PostVM(post, user);
         });
     }
