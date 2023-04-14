@@ -2,13 +2,7 @@ package com.khazardictionary.backend.jpa.model;
 
 import com.khazardictionary.backend.unique.UniqueEmail;
 import com.khazardictionary.backend.unique.UniqueUsername;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -35,7 +29,7 @@ public class User implements UserDetails {
 
     @Email(message = "{khazardictionary.validation.constraints.emailType.message}")
     @NotNull(message = "{khazardictionary.validation.constraints.NotNull.message.email}")
-    @Pattern(regexp = "^([_A-Za-z0-9-+]+\\.?[_A-Za-z0-9-+]+@(gmail.com))$", message = "{khazardictionary.validation.constraints.Pattern.message.email}")
+    @Pattern(regexp = "^([_A-Za-z0-9-+]+\\.?[_A-Za-z0-9-+]+@(khazar.org))$", message = "{khazardictionary.validation.constraints.Pattern.message.email}")
     @UniqueEmail
     private String email;
     
@@ -66,6 +60,9 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

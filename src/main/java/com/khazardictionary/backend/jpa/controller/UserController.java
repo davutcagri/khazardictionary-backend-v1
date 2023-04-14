@@ -1,5 +1,6 @@
 package com.khazardictionary.backend.jpa.controller;
 
+import com.khazardictionary.backend.jpa.model.Role;
 import com.khazardictionary.backend.jpa.model.User;
 import com.khazardictionary.backend.shared.CurrentUser;
 import com.khazardictionary.backend.jpa.service.UserService;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  *
