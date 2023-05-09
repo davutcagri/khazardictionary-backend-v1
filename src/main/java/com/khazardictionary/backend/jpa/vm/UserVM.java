@@ -21,10 +21,13 @@ public class UserVM {
 
     private Stream<String> roleName;
 
+    private boolean verifiedAccount;
+
     public UserVM(User user) {
         this.setUsername(user.getUsername());
         this.setDisplayName(user.getDisplayName());
         this.setImage(user.getImage());
         this.setRoleName(user.getRoles().stream().map(role -> role.getRoleName()));
+        this.setVerifiedAccount(user.isVerifiedAccount());
     }
 }

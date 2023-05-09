@@ -1,6 +1,5 @@
 package com.khazardictionary.backend.jpa.controller;
 
-import com.khazardictionary.backend.jpa.model.Role;
 import com.khazardictionary.backend.jpa.model.User;
 import com.khazardictionary.backend.shared.CurrentUser;
 import com.khazardictionary.backend.jpa.service.UserService;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.khazardictionary.backend.network.response.GenericResponse;
 import com.khazardictionary.backend.jpa.vm.UserUpdateVM;
 import com.khazardictionary.backend.jpa.vm.UserVM;
 import org.springframework.data.domain.Page;
@@ -35,9 +33,8 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/users")
-    public GenericResponse createUser(@Valid @RequestBody User user) {
+    public void createUser(@Valid @RequestBody User user) {
         userService.save(user);
-        return new GenericResponse("User created");
     }
 
     @GetMapping("/users")
@@ -59,8 +56,7 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{username}")
-    public GenericResponse deleteUser(@PathVariable String username) {
+    public void deleteUser(@PathVariable String username) {
         userService.deleteUser(username);
-        return new GenericResponse("User is removed");
     }
 }

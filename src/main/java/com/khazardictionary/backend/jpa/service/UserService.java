@@ -6,6 +6,7 @@ import com.khazardictionary.backend.network.exception.NotFoundException;
 import com.khazardictionary.backend.jpa.model.User;
 import com.khazardictionary.backend.jpa.repository.UserRepository;
 import com.khazardictionary.backend.jpa.vm.UserUpdateVM;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -15,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
- *
  * @author davut
  */
 @Service
@@ -44,6 +44,13 @@ public class UserService {
         userRole.setRoleName("ROLE_USER");
         userRole.setUser(user);
         roleRepository.save(userRole);
+
+        if (user.getUsername().equals("davutcagri")) {
+            Role adminRole = new Role();
+            userRole.setRoleName("ROLE_ADMIN");
+            userRole.setUser(user);
+            roleRepository.save(adminRole);
+        }
     }
 
     public Page<User> getUsers(Pageable page, User user) {

@@ -48,6 +48,8 @@ public class User implements UserDetails {
     private String password;
     
     private String image;
+
+    private boolean verifiedAccount = false;
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Post> posts;
