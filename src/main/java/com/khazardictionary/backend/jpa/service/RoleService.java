@@ -27,11 +27,9 @@ public class RoleService {
     }
 
     public void deleteAdminRole(String username) {
-        if (username != "davutcagri") {
-            User user = userRepository.findByUsername(username);
-            Role role = roleRepository.findByUserAndRoleName(user, "ROLE_ADMIN");
-            roleRepository.deleteById(role.getId());
-        }
+        User user = userRepository.findByUsername(username);
+        Role role = roleRepository.findByUserAndRoleName(user, "ROLE_ADMIN");
+        roleRepository.deleteById(role.getId());
     }
 
 }

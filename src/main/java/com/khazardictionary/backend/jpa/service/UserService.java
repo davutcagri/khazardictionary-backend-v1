@@ -44,13 +44,6 @@ public class UserService {
         userRole.setRoleName("ROLE_USER");
         userRole.setUser(user);
         roleRepository.save(userRole);
-
-        if (user.getUsername().equals("davutcagri")) {
-            Role adminRole = new Role();
-            userRole.setRoleName("ROLE_ADMIN");
-            userRole.setUser(user);
-            roleRepository.save(adminRole);
-        }
     }
 
     public Page<User> getUsers(Pageable page, User user) {
