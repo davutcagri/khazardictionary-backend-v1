@@ -27,24 +27,24 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Email(message = "{khazardictionary.validation.constraints.emailType.message}")
-    @NotNull(message = "{khazardictionary.validation.constraints.NotNull.message.email}")
-    @Pattern(regexp = "^([_A-Za-z0-9-+]+\\.?[_A-Za-z0-9-+]+@(khazar.org))$", message = "{khazardictionary.validation.constraints.Pattern.message.email}")
+    @Email(message = "{khazardictionary.user.email.type.message}")
+    @NotNull(message = "{khazardictionary.user.email.notnull.message}")
+    @Pattern(regexp = "^([_A-Za-z0-9-+]+\\.?[_A-Za-z0-9-+]+@(khazar.org))$", message = "{khazardictionary.user.email.pattern.message}")
     @UniqueEmail
     private String email;
     
-    @NotNull(message = "{khazardictionary.validation.constraints.NotNull.message.username}")
-    @Size(min = 4, max = 255)
+    @NotNull(message = "{khazardictionary.user.username.notnull.message}")
+    @Size(min = 4, max = 255, message = "{khazardictionary.user.username.size.message}")
     @UniqueUsername
     private String username;
 
-    @NotNull(message = "{khazardictionary.validation.constraints.NotNull.message.displayName}")
-    @Size(min = 4, max = 255)
+    @NotNull(message = "{khazardictionary.user.displayname.notnull.message}")
+    @Size(min = 4, max = 255, message = "{khazardictionary.user.displayname.size.message}")
     private String displayName;
 
-    @NotNull(message = "{khazardictionary.validation.constraints.NotNull.message.password}")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "{khazardictionary.validation.constraints.Pattern.message.password}")
-    @Size(min = 8, max = 255)
+    @NotNull(message = "{khazardictionary.user.password.notnull.message}")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "{khazardictionary.user.password.pattern.message}")
+    @Size(min = 8, max = 255, message = "{khazardictionary.user.password.size.message}")
     private String password;
     
     private String image;

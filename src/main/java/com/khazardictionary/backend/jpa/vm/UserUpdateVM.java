@@ -12,10 +12,9 @@ import com.khazardictionary.backend.shared.FileType;
 @Data
 public class UserUpdateVM {
     
-    @NotNull(message = "{khazardictionary.validation.constraints.NotNull.message.displayName}")
+    @NotNull(message = "{khazardictionary.user.displayname.notnull.message}")
     @Size(min = 4, max = 255)
     private String displayName;
 
-    @FileType(types = {"jpeg", "png"})
     private String image;
 }

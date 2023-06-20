@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 public class CommentSendVM {
 
-    @Size(min = 1, max = 250)
+    @Size(min = 1, max = 1000, message = "{khazardictionary.comment.content.size.message}")
     private String content;
 }

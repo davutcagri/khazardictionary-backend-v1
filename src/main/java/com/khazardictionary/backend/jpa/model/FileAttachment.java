@@ -1,6 +1,7 @@
 package com.khazardictionary.backend.jpa.model;
 
 import com.khazardictionary.backend.jpa.model.Post;
+import com.khazardictionary.backend.shared.FileType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class FileAttachment {
     private long id;
 
     private String name;
-    
+
     private String fileType;
 
     @Temporal(TemporalType.TIMESTAMP)

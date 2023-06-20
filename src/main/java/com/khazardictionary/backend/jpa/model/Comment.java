@@ -17,10 +17,13 @@ public class Comment {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
+
     @Size(min = 1, max = 250)
     private String content;
+
     @ManyToOne
     private User user;
+
     @ManyToOne
     private Post post;
 

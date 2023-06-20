@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = {FileTypeValidator.class})
 public @interface FileType {
 
-    public String message() default "{khazardictionary.validation.constraints.FileType.message}";
+    public String message() default "{khazardictionary.file.type.unsupported.message}";
 
     public Class<?>[] groups() default {};
 

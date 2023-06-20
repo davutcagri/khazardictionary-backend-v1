@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 @Retention(value = RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {UniqueEmailValidator.class})
 public @interface UniqueEmail {
-    public String message() default "{khazardictionary.validation.constraints.UniqueEmail.message}";
+    public String message() default "{khazardictionary.user.email.unique.message}";
 
     public Class<?>[] groups() default {};
 
