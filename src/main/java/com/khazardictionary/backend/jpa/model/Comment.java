@@ -1,6 +1,7 @@
 package com.khazardictionary.backend.jpa.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -18,7 +19,7 @@ public class Comment {
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
 
-    @Size(min = 1, max = 250)
+    @Size(min = 1, max = 1000)
     private String content;
 
     @ManyToOne

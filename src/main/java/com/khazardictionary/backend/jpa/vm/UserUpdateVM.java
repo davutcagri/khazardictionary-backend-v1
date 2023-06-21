@@ -13,7 +13,7 @@ import com.khazardictionary.backend.shared.FileType;
 public class UserUpdateVM {
     
     @NotNull(message = "{khazardictionary.user.displayname.notnull.message}")
-    @Size(min = 4, max = 255)
+    @Size(min = 4, max = 30)
     private String displayName;
 
     private String image;

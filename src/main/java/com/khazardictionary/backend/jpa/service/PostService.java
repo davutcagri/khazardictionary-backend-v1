@@ -45,6 +45,7 @@ public class PostService {
         post.setTimestamp(new Date());
         post.setCategory(postSumbitVM.getCategory());
         post.setUser(user);
+        post.setCommentsLocked(false);
         postRepository.save(post);
         Optional<FileAttachment> optionalFileAttachment = fileAttachmentRepository.findById(postSumbitVM.getAttachmentId());
         if (optionalFileAttachment.isPresent()) {
@@ -54,12 +55,8 @@ public class PostService {
         }
     }
 
-    public Post getPost(long id) {
+    public Post getPost(Long id) {
         return postRepository.getOne(id);
-    }
-
-    public Page<Post> getPostByUserAndId(User user, Long id, Pageable page) {
-        return postRepository.findByUserAndId(user, id, page);
     }
 
     public Page<Post> getPosts(Pageable page) {
@@ -109,6 +106,17 @@ public class PostService {
             fileService.deleteAttachmentFile(fileName);
         }
         postRepository.deleteById(id);
+    }
+
+    public Post updatePostCommentLock(Long id) {
+        Post post = postRepository.getOne(id);
+        if(!post.isCommentsLocked()) {
+            post.setCommentsLocked(true);
+        }
+        else {
+            post.setCommentsLocked(false);
+        }
+        return postRepository.save(post);
     }
 
 ////////////////////////////////////////////////////////////////////////////////

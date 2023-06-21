@@ -10,15 +10,18 @@ public class CommentVM {
 
     private String content;
 
-    private UserVM user;
+    private UserVM author;
 
     private PostVM post;
+
+    private long timestamp;
 
     public CommentVM(Comment comment) {
         this.setId(comment.getId());
         this.setContent(comment.getContent());
-        this.setUser(new UserVM(comment.getUser()));
+        this.setAuthor(new UserVM(comment.getUser()));
         this.setPost(new PostVM(comment.getPost(), comment.getUser()));
+        this.setTimestamp((comment.getTimestamp().getTime()));
     }
 
 }

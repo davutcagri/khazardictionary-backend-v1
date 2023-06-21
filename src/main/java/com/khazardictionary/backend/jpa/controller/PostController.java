@@ -20,14 +20,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -52,6 +45,20 @@ public class PostController {
     @GetMapping("/posts")
     public Page<PostVM> getPosts(@PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable page, @CurrentUser User user) {
         return postService.getPosts(page).map(post -> {
+            return new PostVM(post, user);
+        });
+    }
+
+    @GetMapping("/posts/view/{id:[0-9]+}")
+    public PostVM getPostById (@PathVariable Long id, @CurrentUser User user) {
+        Post post = postService.getPost(id);
+        return new PostVM(post, user);
+    }
+
+    @GetMapping("/users/{username}/posts")
+    public Page<PostVM> getPostsByUsername(@PathVariable String username,
+                                           @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable page, @CurrentUser User user) {
+        return postService.getPostsByUsername(username, page).map(post -> {
             return new PostVM(post, user);
         });
     }
@@ -95,30 +102,17 @@ public class PostController {
         }));
     }
 
-    @GetMapping("/users/{username}/posts")
-    public Page<PostVM> getPostsByUsername(@PathVariable String username, 
-            @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable page, @CurrentUser User user) {
-        return postService.getPostsByUsername(username, page).map(post -> {
-            return new PostVM(post, user);
-        });
-    }
-
-    @GetMapping("/posts/{username}/{id:[0-9]+}")
-    public Page<PostVM> getPostByUsernameAndId(
-            @PathVariable String username,
-            @PathVariable Long id,
-            @CurrentUser User user,
-            @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable page) {
-        User postOwner = userService.getByUsername(username);
-        return postService.getPostByUserAndId(postOwner, id, page).map(post -> {
-            return new PostVM(post, user);
-        });
-    }
-
     @DeleteMapping("/posts/{id:[0-9]+}")
     @PreAuthorize("@postSecurityService.isAllowedToDelete(#id, principal)")
     public GenericResponse deletePost(@PathVariable long id, @CurrentUser User loggedInUser) {
         postService.delete(id);
         return new GenericResponse("Post removed");
     }
+
+    @PutMapping("/posts/{id:[0-9]+}/commentsLock")
+    public PostVM updatePostCommentLock(@PathVariable Long id, @CurrentUser User user) {
+        Post post = postService.updatePostCommentLock(id);
+        return new PostVM(post, user);
+    }
+
 }

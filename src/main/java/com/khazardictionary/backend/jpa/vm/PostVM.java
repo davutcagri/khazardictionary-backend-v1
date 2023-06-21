@@ -21,7 +21,9 @@ public class PostVM {
     
     private String category;
 
-    private UserVM user;
+    private boolean isCommentsLocked;
+
+    private UserVM author;
 
     private FileAttachmentVM fileAttachment;
 
@@ -37,7 +39,8 @@ public class PostVM {
         this.setContent(post.getContent());
         this.setTimestamp(post.getTimestamp().getTime());
         this.setCategory(post.getCategory());
-        this.setUser(new UserVM(post.getUser()));
+        this.setCommentsLocked(post.isCommentsLocked());
+        this.setAuthor(new UserVM(post.getUser()));
         this.setLikeCount(post.getLikes().size());
         this.setCommentCount(post.getComments().size());
         if (post.getFileAttachment() != null) {

@@ -40,6 +40,8 @@ public class Post {
     
     private String category;
 
+    private boolean isCommentsLocked;
+
     @ManyToOne
     private User user;
 

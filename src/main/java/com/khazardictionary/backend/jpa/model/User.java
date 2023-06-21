@@ -34,12 +34,12 @@ public class User implements UserDetails {
     private String email;
     
     @NotNull(message = "{khazardictionary.user.username.notnull.message}")
-    @Size(min = 4, max = 255, message = "{khazardictionary.user.username.size.message}")
+    @Size(min = 4, max = 20, message = "{khazardictionary.user.username.size.message}")
     @UniqueUsername
     private String username;
 
     @NotNull(message = "{khazardictionary.user.displayname.notnull.message}")
-    @Size(min = 4, max = 255, message = "{khazardictionary.user.displayname.size.message}")
+    @Size(min = 4, max = 30, message = "{khazardictionary.user.displayname.size.message}")
     private String displayName;
 
     @NotNull(message = "{khazardictionary.user.password.notnull.message}")
